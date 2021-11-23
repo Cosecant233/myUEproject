@@ -15,12 +15,20 @@ from tkinter import messagebox
         await asyncio.sleep(1)"""
     
 async def time(websocket):
+    flag:bool
+    flag=1
     while True:
-        message=input("Please enter the array:")
+        #message=input("Please enter the array:")
+        if(flag):
+            message="0,90,0,0,0,0,100"
+            flag=0
+        else:
+            message="0,0,0,0,0,0,0"
+            flag=1
         now="{\"sender\":\"1\",\"recipient\":\"2\",\"content\":\""+message+"\"}"
         print(now)
         await websocket.send(now)
-        await asyncio.sleep(1) 
+        await asyncio.sleep() 
 
 
 if __name__ == '__main__':
