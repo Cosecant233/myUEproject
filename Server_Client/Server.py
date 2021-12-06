@@ -5,7 +5,7 @@ import json
 import time
 
 class MyServer:
-    def __init__(self,host='127.0.0.1',port='8800'):
+    def __init__(self,host='127.0.0.1',port='8282'):
         self.__host=host
         self.__port=port
         self.__listcmd=[]
