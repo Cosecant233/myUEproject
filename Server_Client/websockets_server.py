@@ -20,23 +20,25 @@ camera1 = camera_KinematicsClass.Camera_kinematics()
 
 async def RecvMsg(websocket):
     recvText = await websocket.recv()
-"""     if(recvText[0] == 10):
+    if(recvText[0]=='{'):
+        return
+    cmd=recvText.split(',',1)[0]
+    if(cmd == '10'):
         cameraPos = camera1.RefreshFKAbsolute(recvText[7] + recvText[1:7])
         cameraMsg = [12] + cameraPos + recvText[1:8]
         await websocket.send(cameraMsg)
-    elif(recvText[0] == 11):
+    elif(cmd  == '11'):
         cameraPos = camera1.RefreshFKRelative(recvText[7] + recvText[1:7])
         cameraMsg = [12] + cameraPos + recvText[1:8]
         await websocket.send(cameraMsg)
-    elif(recvText[0] > 0 and recvText[0] <= 8):
+    elif(int(cmd)>=1 and int(cmd)<=8):
         path_planning.ReceQueue.put(recvText)
     else:
-        pass """
+        pass
 
 async def SendMsg(websocket):
     if(not path_planning.SendQueue.empty()):
         message = path_planning.SendQueue.get()            #"0,0,0,0,0,0,0"
-        #msgTmp="{\"sender\":\"1\",\"recipient\":\"2\",\"content\":\""+message+"\"}"
         message = [str(j) for j in message]
         message =','.join(message)
         print("test:",message)

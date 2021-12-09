@@ -36,6 +36,8 @@ async def PathPlanningMainLoop():
         if(not ReceQueue.empty()):
             time.sleep(1)
         ReceivMsg = ReceQueue.get()
+        foo=ReceivMsg.split(',')
+        ReceivMsg = [float(j) for j in foo]
         recvTheta = np.hstack((ReceivMsg[7],ReceivMsg[:7]))
         if(ReceivMsg[0] == 8):
             if(np.linalg.norm( kin.RefreshFKAbsolute(recvTheta) - RRTClass.PosofGoal) < 10):
