@@ -34,3 +34,4 @@ CMakeLists.txt
 *.pri
 *CodeCompletionFolders.txt
 *CodeLitePreProcessor.txt
+**/__pycache__
